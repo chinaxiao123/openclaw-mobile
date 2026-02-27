@@ -413,9 +413,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
       ),
     );
     
-    // 更新 ConfigProvider
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
-    // TODO: configProvider.setModel(_selectedModel, _thinkingMode, _temperature, _maxTokens);
+    // TODO: 更新 ConfigProvider
     
     Future.delayed(const Duration(milliseconds: 1500), () {
       Navigator.pop(context);

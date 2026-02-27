@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/config_provider.dart';
 import '../../providers/session_provider.dart';
 import '../../models/message.dart';
 
