@@ -44,8 +44,8 @@ jobs:
           cp android/app/src/main/AndroidManifest.xml AndroidManifest.xml.backup || true
           cp -r android/app/src/main/kotlin kotlin.backup || true
           
-          # 重新生成 Android 配置
-          flutter create --platforms=android --org com.openclaw .
+          # 重新生成 Android 配置（使用下划线包名）
+          flutter create --platforms=android --org com.openclaw --project-name openclaw_mobile .
           
           # 恢复自定义文件
           if [ -f AndroidManifest.xml.backup ]; then
