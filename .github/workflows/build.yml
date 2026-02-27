@@ -30,13 +30,31 @@ jobs:
         with:
           flutter-version: '3.24.0'
           channel: 'stable'
-          cache: false  # 禁用缓存，确保使用最新配置
+          cache: false
 
       - name: Clean Flutter
         run: flutter clean
 
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Regenerate Android config (Embedding V2)
+        run: |
+          # 备份自定义文件
+          cp android/app/src/main/AndroidManifest.xml AndroidManifest.xml.backup || true
+          cp -r android/app/src/main/kotlin kotlin.backup || true
+          
+          # 重新生成 Android 配置
+          flutter create --platforms=android --org com.openclaw .
+          
+          # 恢复自定义文件
+          if [ -f AndroidManifest.xml.backup ]; then
+            cp AndroidManifest.xml.backup android/app/src/main/AndroidManifest.xml
+          fi
+          
+          if [ -d kotlin.backup ]; then
+            cp -r kotlin.backup/com android/app/src/main/kotlin/ || true
+          fi
 
       - name: Analyze code
         run: flutter analyze
