@@ -42,14 +42,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
-  # 资源文件（需要创建对应目录和文件）
-  # assets:
-  #   - assets/images/
-  #   - assets/animations/
-  
-  # 自定义字体（可选）
-  # fonts:
-  #   - family: OpenClaw
-  #     fonts:
-  #       - asset: assets/fonts/OpenClaw-Regular.ttf
