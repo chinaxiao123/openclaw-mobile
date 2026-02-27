@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/config_provider.dart';
-import '../providers/session_provider.dart';
 import 'chat_screen.dart';
 import 'sessions_screen.dart';
 import 'agent_status_screen.dart';

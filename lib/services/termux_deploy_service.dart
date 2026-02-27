@@ -1,15 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 
 /// Termux 部署服务 - 管理 Termux 自动化部署
 class TermuxDeployService extends ChangeNotifier {
-  static const _termuxPackageName = 'com.termux';
-  static const _termuxApiPackage = 'com.termux.api';
-  
   bool _isTermuxInstalled = false;
   bool _isDeploying = false;
   bool _isDeployed = false;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 
 import '../../providers/config_provider.dart';
 import '../../providers/session_provider.dart';
@@ -203,7 +202,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
     setState(() => _isSending = true);
 
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
     final sessionProvider = Provider.of<SessionProvider>(context, listen: false);
 
     // 添加用户消息

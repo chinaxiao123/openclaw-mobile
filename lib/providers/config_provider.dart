@@ -11,6 +11,10 @@ class ConfigProvider extends ChangeNotifier {
   String _gatewayHost = '';
   int _gatewayPort = 18789;
   String _gatewayToken = '';
+  String _selectedModel = 'qwen3.5-plus';
+  String _thinkingMode = 'auto';
+  double _temperature = 0.7;
+  int _maxTokens = 4096;
   bool _isConfigured = false;
   bool _isLoading = false;
   String? _error;
@@ -19,6 +23,10 @@ class ConfigProvider extends ChangeNotifier {
   String get gatewayHost => _gatewayHost;
   int get gatewayPort => _gatewayPort;
   String get gatewayToken => _gatewayToken;
+  String get selectedModel => _selectedModel;
+  String get thinkingMode => _thinkingMode;
+  double get temperature => _temperature;
+  int get maxTokens => _maxTokens;
   bool get isConfigured => _isConfigured;
   bool get isLoading => _isLoading;
   String? get error => _error;
@@ -46,6 +54,20 @@ class ConfigProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  /// 保存模型设置
+  Future<void> saveModelSettings({
+    required String model,
+    required String thinkingMode,
+    required double temperature,
+    required int maxTokens,
+  }) async {
+    _selectedModel = model;
+    _thinkingMode = thinkingMode;
+    _temperature = temperature;
+    _maxTokens = maxTokens;
+    notifyListeners();
   }
 
   /// 保存配置

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenClaw Logo - 赚钱买大 G</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-title {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Logo 主设计 */
+        .logo-main {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(102,126,234,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-main::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-icon {
+            font-size: 80px;
+            z-index: 1;
+        }
+
+        .logo-text {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 8px;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            margin-top: 4px;
+            z-index: 1;
+        }
+
+        /* 大 G 元素 */
+        .big-g {
+            font-size: 60px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(255,215,0,0.4));
+        }
+
+        /* 变体设计 */
+        .logo-variant {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .variant {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        .variant:hover {
+            transform: scale(1.05);
+        }
+
+        .variant-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .variant-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .variant-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .variant-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .variant-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .variant-6 {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        .variant-icon {
+            font-size: 40px;
+        }
+
+        .variant-text {
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* 深色版本 */
+        .logo-dark {
+            background: #1a1a2e;
+            border: 3px solid #667eea;
+        }
+
+        /* 浅色版本 */
+        .logo-light {
+            background: #fff;
+        }
+
+        .logo-light .logo-text,
+        .logo-light .logo-subtitle {
+            color: #1a1a2e;
+        }
+
+        /* SVG Logo */
+        .svg-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo-title">🎨 OpenClaw Logo 设计 - 赚钱买大 G</div>
+
+        <!-- 主 Logo -->
+        <div class="logo-main">
+            <div class="logo-icon">🤖<span class="big-g">G</span></div>
+            <div class="logo-text">OpenClaw</div>
+            <div class="logo-subtitle">赚钱买大 G</div>
+        </div>
+
+        <!-- 变体设计 -->
+        <div class="logo-title" style="margin-top: 40px;">配色方案</div>
+        <div class="logo-variant">
+            <div class="variant variant-1">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+            <div class="variant variant-2">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+            <div class="variant variant-3">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+            <div class="variant variant-4">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+            <div class="variant variant-5">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+            <div class="variant variant-6">
+                <div class="variant-icon">🤖G</div>
+                <div class="variant-text">OpenClaw</div>
+            </div>
+        </div>
+
+        <!-- SVG 版本 -->
+        <div class="svg-container">
+            <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+                    </filter>
+                </defs>
+                
+                <!-- 圆角矩形背景 -->
+                <rect x="10" y="10" width="180" height="180" rx="45" fill="url(#grad1)" filter="url(#shadow)"/>
+                
+                <!-- 机器人图标 -->
+                <circle cx="100" cy="85" r="35" fill="#fff" opacity="0.9"/>
+                <circle cx="85" cy="80" r="5" fill="#667eea"/>
+                <circle cx="115" cy="80" r="5" fill="#667eea"/>
+                <ellipse cx="100" cy="95" rx="12" ry="6" fill="#667eea"/>
+                
+                <!-- 大 G -->
+                <text x="100" y="145" font-family="Arial" font-size="50" font-weight="bold" 
+                      fill="url(#grad2)" text-anchor="middle" filter="url(#shadow)">G</text>
+                
+                <!-- 文字 -->
+                <text x="100" y="175" font-family="Arial" font-size="16" font-weight="bold" 
+                      fill="#fff" text-anchor="middle">OpenClaw</text>
+                <text x="100" y="190" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.8)" 
+                      text-anchor="middle">赚钱买大 G</text>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        // 下载 SVG
+        function downloadSVG() {
+            const svg = document.querySelector('.svg-container svg');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const blob = new Blob([svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'openclaw-logo.svg';
+            link.click();
+        }
+    </script>
+</body>
+</html>

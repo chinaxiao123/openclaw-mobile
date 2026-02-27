@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'providers/config_provider.dart';
 import 'providers/session_provider.dart';
@@ -10,13 +9,6 @@ import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // 初始化 Hive 本地存储
-  await Hive.initFlutter();
-  
-  // 注册适配器
-  // await Hive.openBox('config');
-  // await Hive.openBox('sessions');
   
   runApp(const OpenClawApp());
 }

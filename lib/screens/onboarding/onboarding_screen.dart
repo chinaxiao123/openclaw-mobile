@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/config_provider.dart';
 import 'welcome_screen.dart';
 import 'gateway_config_screen.dart';
 import 'complete_screen.dart';
@@ -18,11 +16,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Widget> _pages = const [
-    WelcomeScreen(),
-    GatewayConfigScreen(),
-    CompleteScreen(),
-  ];
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      WelcomeScreen(onNext: _nextPage),
+      GatewayConfigScreen(onNext: _nextPage, onBack: _prevPage),
+      const CompleteScreen(),
+    ];
+  }
 
   void _nextPage() {
     if (_currentPage < _pages.length - 1) {
@@ -55,19 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
                 },
-                children: _pages.map((page) {
-                  if (page is WelcomeScreen) {
-                    return WelcomeScreen(onNext: _nextPage);
-                  } else if (page is GatewayConfigScreen) {
-                    return GatewayConfigScreen(
-                      onNext: _nextPage,
-                      onBack: _prevPage,
-                    );
-                  } else if (page is CompleteScreen) {
-                    return const CompleteScreen();
-                  }
-                  return page;
-                }).toList(),
+                children: _pages,
               ),
             ),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'model_settings_screen.dart';
 
 /// 设置屏幕
 class SettingsScreen extends StatelessWidget {
@@ -37,6 +38,23 @@ class SettingsScreen extends StatelessWidget {
 
           const SizedBox(height: 24),
 
+          // 模型设置
+          _buildSectionHeader(context, '模型'),
+          _buildListTile(
+            context,
+            icon: Icons.psychology_outlined,
+            title: '大模型设置',
+            subtitle: 'Qwen3.5-Plus · 自动思考',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ModelSettingsScreen()),
+              );
+            },
+          ),
+
+          const SizedBox(height: 24),
+
           // 连接设置
           _buildSectionHeader(context, '连接'),
           _buildListTile(
@@ -54,6 +72,38 @@ class SettingsScreen extends StatelessWidget {
             title: '测试连接',
             onTap: () {
               // TODO: 测试连接
+            },
+          ),
+
+          const SizedBox(height: 24),
+
+          // 大模型设置
+          _buildSectionHeader(context, '大模型'),
+          _buildListTile(
+            context,
+            icon: Icons.psychology_outlined,
+            title: '模型选择',
+            subtitle: 'qwen3.5-plus',
+            onTap: () {
+              _showModelSelector(context);
+            },
+          ),
+          _buildListTile(
+            context,
+            icon: Icons.speed_outlined,
+            title: '思考模式',
+            subtitle: '自动',
+            onTap: () {
+              _showThinkingMode(context);
+            },
+          ),
+          _buildListTile(
+            context,
+            icon: Icons.memory_outlined,
+            title: '上下文长度',
+            subtitle: '默认',
+            onTap: () {
+              // TODO: 上下文设置
             },
           ),
 
@@ -206,6 +256,188 @@ class SettingsScreen extends StatelessWidget {
             child: const Text('确认'),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showModelSelector(BuildContext context) {
+    final models = [
+      {'name': 'qwen3.5-plus', 'desc': '通义千问，平衡性能和速度'},
+      {'name': 'qwen-max', 'desc': '通义千问，最强性能'},
+      {'name': 'gpt-4', 'desc': 'OpenAI GPT-4'},
+      {'name': 'claude-3', 'desc': 'Anthropic Claude 3'},
+      {'name': 'gemini-pro', 'desc': 'Google Gemini Pro'},
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.4,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                '选择大模型',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.separated(
+                  controller: scrollController,
+                  itemCount: models.length,
+                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final model = models[index];
+                    return Card(
+                      child: ListTile(
+                        leading: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(Icons.smart_toy,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer),
+                        ),
+                        title: Text(
+                          model['name'] as String,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          model['desc'] as String,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        trailing: Icon(Icons.check_circle,
+                            color: index == 0
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.transparent),
+                        onTap: () {
+                          // TODO: 保存模型选择
+                          Navigator.pop(context);
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showThinkingMode(BuildContext context) {
+    final modes = [
+      {'name': '自动', 'desc': '根据问题复杂度自动选择', 'icon': Icons.auto_awesome},
+      {'name': '快速', 'desc': '跳过深度思考，快速响应', 'icon': Icons.flash_on},
+      {'name': '深度', 'desc': '深度思考，提供更详细答案', 'icon': Icons.psychology},
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        minChildSize: 0.3,
+        maxChildSize: 0.7,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                '思考模式',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.separated(
+                  controller: scrollController,
+                  itemCount: modes.length,
+                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final mode = modes[index];
+                    return Card(
+                      child: ListTile(
+                        leading: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: index == 0
+                                ? Theme.of(context).colorScheme.primaryContainer
+                                : Theme.of(context).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            mode['icon'] as IconData,
+                            color: index == 0
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        title: Text(
+                          mode['name'] as String,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: index == 0
+                                ? Theme.of(context).colorScheme.primary
+                                : null,
+                          ),
+                        ),
+                        subtitle: Text(mode['desc'] as String),
+                        trailing: index == 0
+                            ? Icon(Icons.check_circle,
+                                color: Theme.of(context).colorScheme.primary)
+                            : null,
+                        onTap: () {
+                          // TODO: 保存思考模式
+                          Navigator.pop(context);
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

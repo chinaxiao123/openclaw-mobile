@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'message.dart';
+import '../models/message.dart';
 
 /// 会话提供者 - 管理聊天消息
 class SessionProvider extends ChangeNotifier {

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Mobile - UI 预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1400px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #1a1a2e;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #0f0f1a;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1a1a2e;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 100;
+        }
+
+        .screen-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #fff;
+            font-size: 14px;
+            background: linear-gradient(180deg, rgba(102,126,234,0.3) 0%, transparent 100%);
+        }
+
+        /* App Bar */
+        .app-bar {
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .app-bar .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        /* Screen Content */
+        .screen-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .splash-logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            margin-bottom: 32px;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .splash-title {
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 48px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .splash-loading {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Welcome Screen */
+        .welcome-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .welcome-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(102,126,234,0.2);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            margin-bottom: 32px;
+        }
+
+        .welcome-title {
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .welcome-subtitle {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            margin-bottom: 48px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(102,126,234,0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        .feature-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .feature-title {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 56px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        /* Config Screen */
+        .config-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        .input-field {
+            height: 56px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 0 16px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .input-field::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .btn-outline {
+            width: 100%;
+            height: 56px;
+            background: transparent;
+            border: 2px solid rgba(102,126,234,0.5);
+            border-radius: 16px;
+            color: #667eea;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .help-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .help-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-text {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Chat Screen */
+        .chat-messages {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.assistant .message-avatar {
+            background: rgba(102,126,234,0.3);
+        }
+
+        .message.user .message-avatar {
+            background: rgba(118,75,162,0.3);
+        }
+
+        .message-bubble {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .chat-input-field {
+            flex: 1;
+            height: 48px;
+            background: rgba(255,255,255,0.08);
+            border: none;
+            border-radius: 24px;
+            padding: 0 20px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .chat-send-btn {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            height: 80px;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        .nav-item.active {
+            color: #667eea;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        /* Deploy Progress */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 32px;
+        }
+
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .step-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .step-subtext {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .deploy-log {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 32px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        /* Success Screen */
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(76,175,80,0.2);
+            border: 2px solid rgba(76,175,80,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            margin-bottom: 32px;
+        }
+
+        .info-card {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Screen Label */
+        .screen-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <!-- Screen 1: Splash -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="splash-screen">
+                        <div class="splash-logo">🤖<span style="font-size: 40px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">G</span></div>
+                        <div class="splash-title">OpenClaw</div>
+                        <div class="splash-subtitle" style="color: rgba(255,255,255,0.8); font-size: 14px; margin-top: 8px;">赚钱买大 G</div>
+                        <div class="splash-loading"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">启动页</div>
+        </div>
+
+        <!-- Screen 2: Welcome -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="screen-body">
+                        <div class="welcome-content">
+                            <div class="welcome-icon">🤖</div>
+                            <div class="welcome-title">欢迎使用 OpenClaw</div>
+                            <div class="welcome-subtitle">您的 AI Agent 随身助手</div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">🔄</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">无缝连接</div>
+                                    <div class="feature-desc">随时随地连接您的 Gateway</div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">💬</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">实时对话</div>
+                                    <div class="feature-desc">与 Agent 即时通讯</div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">📊</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">状态监控</div>
+                                    <div class="feature-desc">查看 Agent 运行状态</div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-primary">开始配置 →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">欢迎页</div>
+        </div>
+
+        <!-- Screen 3: Gateway Config -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-bar">
+                        <div class="back-btn">←</div>
+                        <span>配置 Gateway</span>
+                    </div>
+                    <div class="screen-body">
+                        <div class="config-form">
+                            <div class="input-group">
+                                <label class="input-label">Gateway 地址</label>
+                                <input class="input-field" type="text" placeholder="192.168.1.100 或 openclaw.example.com" value="127.0.0.1">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">端口</label>
+                                <input class="input-field" type="number" placeholder="18789" value="18789">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">认证 Token</label>
+                                <input class="input-field" type="password" placeholder="您的 Gateway 访问令牌" value="oc-xxxxx">
+                            </div>
+                            
+                            <button class="btn-outline">
+                                📡 测试连接
+                            </button>
+                            
+                            <div class="help-box">
+                                <div class="help-title">ℹ️ 如何获取这些信息？</div>
+                                <div class="help-text">
+                                    1. Gateway 地址：运行 OpenClaw 的设备 IP<br>
+                                    2. 端口：默认为 18789<br>
+                                    3. Token：在 Gateway 配置文件中查看
+                                </div>
+                            </div>
+                            
+                            <button class="btn-primary" style="margin-top: 24px;">下一步</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">配置页</div>
+        </div>
+
+        <!-- Screen 4: Deploy Progress -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-bar">
+                        <div class="back-btn">←</div>
+                        <span>本地部署</span>
+                    </div>
+                    <div class="screen-body">
+                        <div class="progress-container">
+                            <div class="progress-circle">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+                                    <circle stroke="#667eea" stroke-width="8" fill="transparent" r="52" cx="60" cy="60" 
+                                            stroke-dasharray="326.73" stroke-dashoffset="130.69" stroke-linecap="round"/>
+                                </svg>
+                                <div class="progress-text">60%</div>
+                            </div>
+                            <div class="step-text">安装 Agent Reach...</div>
+                            <div class="step-subtext">请稍候，正在自动安装和配置</div>
+                            
+                            <div class="deploy-log">
+                                > 更新 Termux 包... ✓<br>
+                                > 安装 Python... ✓<br>
+                                > 安装 Node.js... ✓<br>
+                                > 安装 OpenClaw... ✓<br>
+                                > 安装 Agent Reach... ⏳<br>
+                                > 配置环境...<br>
+                                > 启动 Gateway...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">部署进度</div>
+        </div>
+
+        <!-- Screen 5: Chat -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-bar">
+                        <span>OpenClaw</span>
+                        <div style="flex:1"></div>
+                        <span style="font-size: 20px; opacity: 0.7;">⋮</span>
+                    </div>
+                    <div class="chat-messages" style="flex: 1; overflow-y: auto;">
+                        <div class="message assistant">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-bubble">
+                                老板好！我是小 7，您的 AI 员工～<br><br>
+                                有啥吩咐？是要赚钱的大项目，还是单纯想找我唠两块钱的？*-*
+                            </div>
+                        </div>
+                        
+                        <div class="message user">
+                            <div class="message-bubble">
+                                帮我查下今天天气
+                            </div>
+                            <div class="message-avatar">👤</div>
+                        </div>
+                        
+                        <div class="message assistant">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-bubble">
+                                好嘞！上海今天晴转多云，15-22°C，适合出门赚钱！☀️
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input class="chat-input-field" type="text" placeholder="输入消息...">
+                        <button class="chat-send-btn">➤</button>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">💬</div>
+                            <div>对话</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">📁</div>
+                            <div>会话</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🤖</div>
+                            <div>Agent</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">⚙️</div>
+                            <div>设置</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">聊天界面</div>
+        </div>
+
+        <!-- Screen 6: Success -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <div class="phone-screen">
+                <div class="screen-content">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="screen-body">
+                        <div class="progress-container">
+                            <div class="success-icon">✓</div>
+                            <div class="welcome-title">部署成功！</div>
+                            <div class="welcome-subtitle">您已准备好使用 OpenClaw</div>
+                            
+                            <div class="info-card">
+                                <div class="info-row">
+                                    <span class="info-label">🌐 地址</span>
+                                    <span class="info-value">127.0.0.1</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">🔌 端口</span>
+                                    <span class="info-value">18789</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">🟢 状态</span>
+                                    <span class="info-value" style="color: #4caf50;">运行中</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-primary">开始使用</button>
+                            <button class="btn-outline" style="margin-top: 12px;">
+                                🔄 重启 Gateway
+                            </button>
+                            <button class="btn-outline" style="margin-top: 12px; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5);">
+                                📋 查看日志
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-label">完成页</div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.chat-input-field').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const messages = input.closest('.screen-content').querySelector('.chat-messages');
+                    const newMessage = document.createElement('div');
+                    newMessage.className = 'message user';
+                    newMessage.innerHTML = `
+                        <div class="message-bubble">${input.value}</div>
+                        <div class="message-avatar">👤</div>
+                    `;
+                    messages.appendChild(newMessage);
+                    input.value = '';
+                    messages.scrollTop = messages.scrollHeight;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
