@@ -47,11 +47,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
-        
-        // 禁用 Play Store 分割功能
-        ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
-        }
     }
 
     buildTypes {
@@ -61,10 +56,6 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-            shrinkResources false
-        }
     }
 }
 
@@ -72,20 +63,4 @@ flutter {
     source '../..'
 }
 
-// 确保使用 Flutter Embedding V2
-android {
-    defaultConfig {
-        // 明确指定使用 V2 embedding
-        manifestPlaceholders = [
-            flutterEmbedding: '2'
-        ]
-    }
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.20"
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
-}
+dependencies {}

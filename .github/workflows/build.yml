@@ -22,9 +22,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -38,27 +35,6 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Regenerate Android config (Embedding V2)
-        run: |
-          # 备份自定义文件
-          cp android/app/src/main/AndroidManifest.xml AndroidManifest.xml.backup || true
-          cp -r android/app/src/main/kotlin kotlin.backup || true
-          
-          # 重新生成 Android 配置（使用下划线包名）
-          flutter create --platforms=android --org com.openclaw --project-name openclaw_mobile .
-          
-          # 恢复自定义文件
-          if [ -f AndroidManifest.xml.backup ]; then
-            cp AndroidManifest.xml.backup android/app/src/main/AndroidManifest.xml
-          fi
-          
-          if [ -d kotlin.backup ]; then
-            cp -r kotlin.backup/com android/app/src/main/kotlin/ || true
-          fi
-
-      - name: Analyze code
-        run: flutter analyze
-
       - name: Build Release APK
         run: flutter build apk --release
 
@@ -68,11 +44,3 @@ jobs:
           name: openclaw-mobile-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
-
-      - name: Create Release (on tag)
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: build/app/outputs/flutter-apk/app-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
