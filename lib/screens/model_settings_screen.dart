@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../providers/config_provider.dart';
 
 /// 大模型设置屏幕
 class ModelSettingsScreen extends StatefulWidget {
