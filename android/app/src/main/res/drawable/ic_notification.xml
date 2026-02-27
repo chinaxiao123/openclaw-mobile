@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    
+    <!-- 通知图标 - 简化版机器人头部 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,12m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"/>
+    
+    <path
+        android:fillColor="#667eea"
+        android:pathData="M21,11m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#667eea"
+        android:pathData="M27,11m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+</vector>
