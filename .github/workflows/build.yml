@@ -30,7 +30,10 @@ jobs:
         with:
           flutter-version: '3.24.0'
           channel: 'stable'
-          cache: true
+          cache: false  # 禁用缓存，确保使用最新配置
+
+      - name: Clean Flutter
+        run: flutter clean
 
       - name: Get dependencies
         run: flutter pub get

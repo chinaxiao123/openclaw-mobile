@@ -72,6 +72,16 @@ flutter {
     source '../..'
 }
 
+// 确保使用 Flutter Embedding V2
+android {
+    defaultConfig {
+        // 明确指定使用 V2 embedding
+        manifestPlaceholders = [
+            flutterEmbedding: '2'
+        ]
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.20"
     implementation 'androidx.core:core-ktx:1.12.0'
