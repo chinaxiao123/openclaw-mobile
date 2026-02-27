@@ -1,0 +1,55 @@
+name: openclaw_mobile
+description: "OpenClaw Mobile Client - Manage your AI Agent on the go"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # 状态管理
+  provider: ^6.1.1
+  
+  # WebSocket 连接
+  web_socket_channel: ^2.4.0
+  
+  # 本地存储
+  shared_preferences: ^2.2.2
+  
+  # HTTP 请求
+  http: ^1.1.2
+  
+  # UI 组件和动画
+  cupertino_icons: ^1.0.6
+  flutter_animate: ^4.3.0
+  
+  # 工具
+  uuid: ^4.2.2
+  intl: ^0.18.1
+  
+  # 平台特定功能
+  package_info_plus: ^5.0.1
+  url_launcher: ^6.2.2
+  permission_handler: ^11.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  
+  # 资源文件（需要创建对应目录和文件）
+  # assets:
+  #   - assets/images/
+  #   - assets/animations/
+  
+  # 自定义字体（可选）
+  # fonts:
+  #   - family: OpenClaw
+  #     fonts:
+  #       - asset: assets/fonts/OpenClaw-Regular.ttf
